@@ -1,0 +1,5 @@
+path,required,description
+logs/v8c_serial_log.txt,yes,Log serial bruto da execução de bancada
+results/v8c_acquisition.csv,yes,CSV de aquisição contínua com schema V8C
+results/v8c_report.md,yes,Relatório preenchido com decisão PASS/WARN/FAIL
+results/v8c_validation_summary.csv,no,Resumo tabular de validação quando disponível

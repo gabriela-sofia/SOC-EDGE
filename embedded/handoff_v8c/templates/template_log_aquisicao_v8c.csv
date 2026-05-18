@@ -1,0 +1,1 @@
+timestamp_ms,voltage_v,temperature_c,current_ma,delta_voltage,delta_temperature,delta_current,soc_final,inference_time_ms,free_heap,min_free_heap,reset_count,anomaly_flag,status
