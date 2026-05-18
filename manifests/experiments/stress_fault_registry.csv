@@ -1,0 +1,8 @@
+test_id,category,scenario,planned_stage,required_evidence,status
+STRESS_LONG_RUN,stress,long_run,V8C,log_continuo_e_metricas_temporais,planned
+STRESS_MEMORY,stress,heap_trend,V8C,free_heap_min_free_heap_por_amostra,planned
+STRESS_SERIAL,stress,serial_reconnection,V8C,log_com_interrupcao_e_recuperacao,planned
+STRESS_OVERFLOW,stress,timestamp_overflow,V8C,registro_de_monotonicidade_ou_wrap,planned
+FAULT_DROPOUT,fault,sensor_dropout,V8C,evento_injetado_e_flag_observada,planned
+FAULT_CORRUPT,fault,pacote_corrompido,V8C,linha_corrompida_e_resposta_do_validador,planned
+FAULT_WATCHDOG,fault,watchdog_timeout,V8C,registro_de_timeout_e_recovery,planned
