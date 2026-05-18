@@ -1,0 +1,111 @@
+﻿# ============================================================
+# Python/cache
+# ============================================================
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+.venv/
+venv/
+env/
+
+# ============================================================
+# Local tooling not intended for publication
+# ============================================================
+.claude/
+.codex/
+CLAUDE.md
+
+# ============================================================
+# Raw/heavy data - never commit full datasets
+# ============================================================
+data/
+CORE/
+outputs/
+local_runs/
+artifacts/
+audit_reports/
+raw_zips/
+
+*.zip
+*.rar
+*.7z
+*.tar
+*.gz
+
+*.csv.gz
+*.parquet
+*.feather
+*.xlsx
+*.xls
+
+*.npy
+*.npz
+*.pkl
+*.joblib
+*.h5
+*.pt
+*.pth
+*.onnx
+*.tflite
+*.mlx
+
+# ============================================================
+# External/raw dataset folders seen in current tree
+# ============================================================
+LG_HG2_Original_Dataset_McMasterUniversity_Jan_2020/
+LG_HG2_Prepared_Dataset_McMasterUniversity_Jan_2020/
+ESP32_V7B_GAB_RUN_RESULT/
+models_external/
+
+# ============================================================
+# Handoff packages - keep curated docs/embedded copies instead
+# ============================================================
+handoff_esp32/
+handoff_esp32_domain_aware_soc_method_b_v1/
+handoff_esp32_soc_method_b_v1/
+handoff_esp32_v7/
+handoff_esp32_v7c/
+handoff_esp32_v8b_canonical/
+handoff_esp32_v8b_canonical_preparation/
+handoff_esp32_v8b2_canonical/
+
+# The curated public V8B2 package lives under embedded/handoff_v8b2/
+
+# ============================================================
+# Logs/temp
+# ============================================================
+*.log
+*.tmp
+*.bak
+
+# ============================================================
+# OS/editor
+# ============================================================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Loose local/raw files
+dccpubliclightingp20120822-1411.csv
+ziIDiF1E
+BatteryML-main.zip
+energy-harvesting-dataset-master.zip
+ESP32_V7B_GAB_RUN_RESULT.zip
+handoff_esp32_soc_method_b_v1.zip
+handoff_esp32_v7.zip
+PoliMi-TUB dataset - LG 18650HE4 Li-Ion Battery.zip
+SP1_*.zip
+SP2_*.zip
+SP3_*.zip
+
+
+# Allow curated public ESP32 handoff documentation
+!docs/handoff_esp32/
+!docs/handoff_esp32/**
+

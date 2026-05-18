@@ -1,0 +1,5 @@
+dataset,role,raw_data_in_git,public_representation,notes
+Oxford,referencia_laboratorial_historica,no,docs/manifests,Usado na linhagem metodologica e validacao experimental historica
+LG18650_HG2,dominio_complementar_bateria_18650,no,docs/manifests,Usado para analise de perfis e generalizacao entre dominios
+SP2,dominio_cross_domain,no,docs/manifests,Usado para avaliacao metodologica complementar
+IoT,dominio_canonico_v7c_v8b2,no,embedded/replay,Base dos vetores pequenos de replay e validacao V8B2

@@ -1,0 +1,7 @@
+sample_id,mode,source,synthetic_or_real,voltage_v,temperature_c,current_ma,delta_voltage,delta_temperature,delta_current,soc_raw_model,soc_clipped_reference,is_saturated,saturation_reason
+gv_06,EXTENDED,canonical_golden_vectors,real,4.076565249646489,14.658732527094834,68.06724998253421,0.0159108429802666,1.4967648175222408,37.04576659080715,1.14829584,1.0,1,model_output_above_1
+gv_17,EXTENDED,canonical_golden_vectors,real,4.047729161989878,22.56971254507616,57.12076280671909,-0.0513686858405356,-17.075187788547723,19.313913401295764,1.05824279,1.0,1,model_output_above_1
+gv_19,EXTENDED,canonical_golden_vectors,real,3.947791376267152,11.779441624530248,130.12935129478274,-0.0471022970196796,0.7823893285703534,37.01721113309139,1.04627404,1.0,1,model_output_above_1
+iot_0009,EXTENDED,real_iot_validation_inputs,real,4.21,14.48,50.5,0.0199999999999995,0.200000000000001,-1.3999999999999986,-0.00126228,0.0,1,model_output_below_0
+iot_0046,EXTENDED,real_iot_validation_inputs,real,4.21,14.34,51.0,0.0199999999999995,0.4399999999999995,-4.600000000000001,-0.01189043,0.0,1,model_output_below_0
+iot_0074,EXTENDED,real_iot_validation_inputs,real,4.21,22.12,51.5,0.0099999999999997,0.5700000000000003,-13.0,-0.01627477,0.0,1,model_output_below_0

@@ -1,0 +1,6 @@
+experiment_stage,description,status,public_artifacts,next_action
+method_b_definition,Definicao do alvo por throughput acumulado,consolidated,docs/metodologia/definicao_alvo_soc.md,Preservar formula e unidades
+cross_domain_validation,Avaliacao entre dominios Oxford LG18650 SP2 e IoT,historical,docs/experimentos/registro_experimentos.md,Manter como linhagem metodologica
+v7c_canonical_model,Modelo canonico e artefatos de exportacao,consolidated,embedded/handoff_v8b2/manifests/MODEL_MANIFEST_V8B2.md,Revalidar se pesos ou scaler mudarem
+v8b2_embedded_replay,Replay embarcado na ESP32,pass,docs/validacao_embarcada/relatorio_v8b2.md,Usar como estado atual publico
+v8c_bench_validation,Bancada com aquisicao real ou semi-real,planned,docs/validacao_embarcada/proximos_experimentos.md,Executar proximo experimento

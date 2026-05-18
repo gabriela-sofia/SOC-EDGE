@@ -1,0 +1,11 @@
+scenario_id,description,anomaly_type,perturbation,voltage_v,temperature_c,current_ma,delta_voltage,delta_temperature,delta_current,soc_raw_model,soc_clipped_reference,expected_anomaly_flag,expected_anomaly_code,expected_severity,embedded_feasible,reference_only,limitation
+ano_001_voltage_spike,Sudden +0.5V spike in voltage,voltage_out_of_range,+0.5V,4.55,25.0,150.0,0.5,0.0,0.0,0.552537,0.552537,1,1,HIGH,YES,NO,NONE
+ano_002_current_spike,Sudden +300mA spike in current,current_out_of_range,+300mA,4.05,25.0,450.0,0.0,0.0,300.0,0.55323,0.55323,1,2,HIGH,YES,NO,NONE
+ano_003_temperature_jump,Sudden +20C temperature jump,temperature_out_of_range,+20C,4.05,55.0,150.0,0.0,20.0,0.0,0.252888,0.252888,1,3,MEDIUM,YES,NO,NONE
+ano_004_voltage_flatline,Voltage constant for multiple samples (flatline),voltage_flatline,delta_v=0 for 5+ samples,4.05,25.0,150.0,0.0,0.0,0.0,0.859608,0.859608,1,4,MEDIUM,YES,NO,Requires 5-sample window buffer in firmware
+ano_005_current_dropout,Sudden current dropout to near-zero,current_dropout,current=1mA (below training min),4.05,25.0,1.0,0.0,0.0,-149.0,0.667715,0.667715,1,5,HIGH,YES,NO,NONE
+ano_006_noise_burst,High-frequency noise: large delta_current oscillation,abrupt_delta_current,|delta_i| > 200mA per step,4.05,25.0,150.0,0.0,0.0,250.0,0.810213,0.810213,1,6,LOW,YES,NO,NONE
+ano_007_soc_temporal_incoherence,SOC increases during high discharge (negative coherence),soc_coherence_violation,offline reference only,3.95,25.0,300.0,-0.05,0.0,50.0,0.729011,0.729011,1,7,MEDIUM,NO,YES,Requires reference lookup table on device; not embedded in Phase 1
+ano_008_domain_shift_current_scale,Current in Amperes instead of mA (10x scale error),domain_shift,current=0.15 (should be 150mA; passed as 0.15),4.05,25.0,0.15,0.0,0.0,0.0,0.59419,0.59419,1,8,HIGH,NO,YES,Scale error detectable if current < training_min; depends on value. Mark as REPLAY_WARNING
+ano_009_low_voltage_warning,Voltage below safe operating minimum (3.8V),voltage_out_of_range,voltage=3.75V,3.75,25.0,150.0,-0.02,0.0,0.0,1.296915,1.0,1,9,MEDIUM,YES,NO,NONE
+ano_010_high_temperature_warning,Temperature above safe limit (45C),temperature_out_of_range,temperature=48C,4.05,48.0,150.0,0.0,3.0,0.0,-0.088126,0.0,1,10,MEDIUM,YES,NO,NONE

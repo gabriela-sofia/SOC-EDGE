@@ -1,0 +1,11 @@
+scenario_id,expected_anomaly_flag,expected_anomaly_code,expected_severity,embedded_feasible,reference_only
+ano_001_voltage_spike,1,1,HIGH,YES,NO
+ano_002_current_spike,1,2,HIGH,YES,NO
+ano_003_temperature_jump,1,3,MEDIUM,YES,NO
+ano_004_voltage_flatline,1,4,MEDIUM,YES,NO
+ano_005_current_dropout,1,5,HIGH,YES,NO
+ano_006_noise_burst,1,6,LOW,YES,NO
+ano_007_soc_temporal_incoherence,1,7,MEDIUM,NO,YES
+ano_008_domain_shift_current_scale,1,8,HIGH,NO,YES
+ano_009_low_voltage_warning,1,9,MEDIUM,YES,NO
+ano_010_high_temperature_warning,1,10,MEDIUM,YES,NO
