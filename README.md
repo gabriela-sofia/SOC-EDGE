@@ -101,6 +101,17 @@ python scripts/run_v8b2_validation.py caminho/do/log.txt
 
 O auditor verifica diretórios, arquivos obrigatórios, validador canônico, modos GOLDEN/EXTENDED/ANOMALY e limites de claim.
 
+## Benchmark embarcado V8B2
+
+Os logs seriais do replay V8B2 podem ser analisados sem versionar novas saídas locais:
+
+```powershell
+python scripts/parse_v8b2_benchmark.py embedded/handoff_v8b2/v8b2_esp32_golden_log.txt
+python scripts/parse_v8b2_benchmark.py embedded/handoff_v8b2/v8b2_esp32_golden_log.txt embedded/handoff_v8b2/v8b2_esp32_extended_log.txt embedded/handoff_v8b2/v8b2_esp32_anomaly_log.txt --json local_runs/v8b2_benchmark_summary.json --csv local_runs/v8b2_benchmark_metrics.csv
+```
+
+Como `local_runs/` é ignorado, relatórios gerados localmente não entram no Git. O benchmark mede runtime, latência, heap e parsing do replay embarcado; ele não representa validação em campo, produção ou sensor físico real no V8B2.
+
 ## Próximo Estágio
 
 O próximo estágio metodologicamente correto é o V8C: validação de bancada com aquisição real ou semi-real, sensor físico, descarga controlada e relatório completo de latência, RAM, flash, estabilidade e paridade. V8C ainda não é campo nem produção.
