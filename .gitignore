@@ -104,6 +104,22 @@ SP1_*.zip
 SP2_*.zip
 SP3_*.zip
 
+# ============================================================
+# Historical/local working documents not curated for public release
+# ============================================================
+CURRENT_PROJECT_STATE.md
+DELIVERY_SUMMARY_2026-05-06.txt
+MEETING_ORIENTADOR_SOC.md
+MEETING_UPDATE_METHOD_B_TO_V5_PROGRESS.md
+PROJECT_FINAL_STRUCTURE.md
+README_FINAL.md
+README_SOC_NEXT_PHASE.md
+REPORTS/
+Readme file-Results Comments.txt
+V8A_RESULTS_AT_A_GLANCE.txt
+V8B0_EXECUTION_COMPLETE.txt
+templates/
+
 
 # Allow curated public ESP32 handoff documentation
 !docs/handoff_esp32/
