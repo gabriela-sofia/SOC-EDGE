@@ -1,0 +1,46 @@
+{
+  "validator_version": "V8B2",
+  "log_file": "v8b2_esp32_anomaly_log.txt",
+  "timestamp": "2026-05-17T17:51:12.679396",
+  "parse_errors": 9,
+  "golden": {
+    "mode": "GOLDEN",
+    "status": "SKIPPED",
+    "n_expected": 20,
+    "reason": "No GOLDEN samples in log"
+  },
+  "extended": {
+    "mode": "EXTENDED",
+    "status": "SKIPPED",
+    "n_expected": 120,
+    "reason": "No EXTENDED samples in log"
+  },
+  "anomaly": {
+    "mode": "ANOMALY",
+    "status": "PASS",
+    "n_expected": 10,
+    "n_scenarios": 10,
+    "n_embedded_feasible": 8,
+    "true_positives": 10,
+    "false_positives": 0,
+    "false_negatives": 0,
+    "recall_all": 1.0,
+    "recall_embedded": 1.0,
+    "precision": 1.0,
+    "false_positive_rate": 0.0,
+    "recall_threshold": 0.9
+  },
+  "resources": {
+    "latency_mean_ms": 0.2069,
+    "latency_min_ms": 0.14,
+    "latency_max_ms": 0.794,
+    "latency_p95_ms": 0.5014999999999994,
+    "latency_warn": false,
+    "free_heap_mean": 351092.0,
+    "free_heap_min": 351092.0,
+    "min_free_heap_global": 351092.0,
+    "heap_warn": false,
+    "total_samples": 10,
+    "crash_detected": false
+  }
+}

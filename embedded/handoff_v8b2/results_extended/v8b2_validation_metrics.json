@@ -1,0 +1,46 @@
+{
+  "validator_version": "V8B2",
+  "log_file": "v8b2_esp32_extended_log.txt",
+  "timestamp": "2026-05-17T17:32:08.437720",
+  "parse_errors": 9,
+  "golden": {
+    "mode": "GOLDEN",
+    "status": "SKIPPED",
+    "n_expected": 20,
+    "reason": "No GOLDEN samples in log"
+  },
+  "extended": {
+    "mode": "EXTENDED",
+    "status": "PASS",
+    "n_expected": 120,
+    "matched_samples": 120,
+    "n_saturated": 6,
+    "mae_all": 1.2321666666650539e-06,
+    "rmse_all": 1.8364408512075165e-06,
+    "r2_all": 0.9999999999586604,
+    "mae_non_saturated": 1.2970175438579515e-06,
+    "rmse_non_saturated": 1.8841485582237453e-06,
+    "r2_non_saturated": 0.9999999999511635,
+    "mae_saturated": 0.0,
+    "mae_threshold": 0.001
+  },
+  "anomaly": {
+    "mode": "ANOMALY",
+    "status": "SKIPPED",
+    "n_expected": 10,
+    "reason": "No ANOMALY samples in log"
+  },
+  "resources": {
+    "latency_mean_ms": 0.1345333333333333,
+    "latency_min_ms": 0.128,
+    "latency_max_ms": 0.788,
+    "latency_p95_ms": 0.13,
+    "latency_warn": false,
+    "free_heap_mean": 351068.0,
+    "free_heap_min": 351068.0,
+    "min_free_heap_global": 351068.0,
+    "heap_warn": false,
+    "total_samples": 120,
+    "crash_detected": false
+  }
+}

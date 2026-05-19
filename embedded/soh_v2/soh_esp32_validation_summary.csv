@@ -1,0 +1,2 @@
+n_amostras_input,n_amostras_tabela_final,n_valid_python,n_missing_python,n_valid_esp32,n_missing_esp32,n_valid_pair,n_soh_esp32_out_of_range,sample_id_match_all,MAE_python_vs_esp32,RMSE_python_vs_esp32,erro_maximo_python_vs_esp32,inference_time_ms_mean,inference_time_ms_max,free_heap_min,decision
+120,120,120,0,120,0,120,0,True,1.0356666666664719e-06,1.3803592527539893e-06,5.150000000009314e-06,0.2546833333333333,0.335,277204.0,SOH_PARITY_TABLE_VALID_FOR_INTERPRETATION

@@ -1,0 +1,2 @@
+latency_mean_ms,latency_min_ms,latency_max_ms,latency_p95_ms,latency_warn,free_heap_mean,free_heap_min,min_free_heap_global,heap_warn,total_samples,crash_detected
+0.1345333333333333,0.128,0.788,0.13,False,351068.0,351068.0,351068.0,False,120,False
