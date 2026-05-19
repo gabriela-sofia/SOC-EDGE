@@ -1,0 +1,90 @@
+{
+  "package_name": "SOC-EDGE V8B2 canonical replay package",
+  "package_stage": "V8B2",
+  "validation_scope": "ESP32 embedded replay",
+  "canonical_model": "V7C canonical MLP executed inside V8B2 package",
+  "canonical_target": "soc_method_b",
+  "feature_order": [
+    "voltage_v",
+    "temperature_c",
+    "current_ma",
+    "delta_voltage",
+    "delta_temperature",
+    "delta_current"
+  ],
+  "feature_units": {
+    "voltage_v": "V",
+    "temperature_c": "C",
+    "current_ma": "mA",
+    "delta_voltage": "V",
+    "delta_temperature": "C",
+    "delta_current": "mA"
+  },
+  "scaler_rule": "MinMax scaling compatible with the exported Python/sklearn scaler; do not clip scaled features.",
+  "output_rule": "Clip only final SOC output to [0, 1].",
+  "required_directories": [
+    "firmware",
+    "include",
+    "replay",
+    "anomaly",
+    "validation",
+    "manifests",
+    "results_golden",
+    "results_extended",
+    "results_anomaly",
+    "results_template"
+  ],
+  "required_files": [
+    "README.md",
+    "firmware/firmware_soc_v8b2_canonical.ino",
+    "include/canonical_model_weights_v8b2.h",
+    "include/replay_vectors_v8b2.h",
+    "replay/canonical_golden_vectors_v8b2.csv",
+    "replay/canonical_extended_replay_v8b2.csv",
+    "replay/canonical_extended_reference_v8b2.csv",
+    "replay/canonical_saturation_cases_v8b2.csv",
+    "anomaly/anomaly_replay_scenarios_v8b2.csv",
+    "anomaly/anomaly_expected_flags_v8b2.csv",
+    "anomaly/anomaly_manifest_v8b2.csv",
+    "validation/validate_esp32_v8b2.py",
+    "manifests/MODEL_MANIFEST_V8B2.md",
+    "manifests/canonical_replay_manifest_v8b2.csv",
+    "results_golden/v8b2_validation_metrics.json",
+    "results_golden/v8b2_validation_report.md",
+    "results_golden/v8b2_golden_comparison.csv",
+    "results_extended/v8b2_validation_metrics.json",
+    "results_extended/v8b2_validation_report.md",
+    "results_extended/v8b2_extended_comparison.csv",
+    "results_anomaly/v8b2_validation_metrics.json",
+    "results_anomaly/v8b2_validation_report.md",
+    "results_anomaly/v8b2_anomaly_comparison.csv",
+    "results_template/RESULT_TEMPLATE_ESP32_V8B2_CANONICAL.md"
+  ],
+  "validation_modes": [
+    "GOLDEN",
+    "EXTENDED",
+    "ANOMALY"
+  ],
+  "expected_status": {
+    "GOLDEN": "PASS",
+    "EXTENDED": "PASS",
+    "ANOMALY": "PASS"
+  },
+  "claim_limits": [
+    "no field validation",
+    "no production claim",
+    "no physical sensor validation in V8B2",
+    "no 24/7 operation claim",
+    "no operational SOH degradation diagnosis"
+  ],
+  "canonical_validator": "embedded/handoff_v8b2/validation/validate_esp32_v8b2.py",
+  "noncanonical_validator_paths": [
+    "embedded/handoff_v8b2/validate_esp32_v8b2.py"
+  ],
+  "notes": [
+    "SOC Method B is the main pipeline.",
+    "V8B2 validates ESP32 embedded replay only.",
+    "V8C is the next bench validation stage and is not field or production validation.",
+    "SOH remains a separate track and does not create operational degradation claims."
+  ]
+}

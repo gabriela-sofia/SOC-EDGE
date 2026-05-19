@@ -90,6 +90,17 @@ Para verificar a estrutura pública do handoff V8B2:
 powershell -ExecutionPolicy Bypass -File scripts/verify_handoff_v8b2.ps1
 ```
 
+## Auditoria do Pacote V8B2
+
+O pacote V8B2 possui um manifesto canônico e um auditor estrutural:
+
+```powershell
+python scripts/check_v8b2_package.py
+python scripts/run_v8b2_validation.py caminho/do/log.txt
+```
+
+O auditor verifica diretórios, arquivos obrigatórios, validador canônico, modos GOLDEN/EXTENDED/ANOMALY e limites de claim.
+
 ## Próximo Estágio
 
 O próximo estágio metodologicamente correto é o V8C: validação de bancada com aquisição real ou semi-real, sensor físico, descarga controlada e relatório completo de latência, RAM, flash, estabilidade e paridade. V8C ainda não é campo nem produção.
