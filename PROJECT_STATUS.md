@@ -1,10 +1,10 @@
 # Status do Projeto SOC Method B
 
-Atualizado em: 2026-05-18
+Atualizado em: 2026-05-19
 
 ## Estágio Atual
 
-O projeto está no estágio V8B2 consolidado. O pacote V8B2 validou a inferência embarcada por replay na ESP32, usando vetores controlados e protocolo de anomalias.
+O SOC Method B é o pipeline principal do repositório. O projeto está no estágio V8B2 consolidado. O modelo canônico V7C foi executado dentro do pacote V8B2, e o pacote V8B2 validou a inferência embarcada por replay na ESP32, usando vetores controlados e protocolo de anomalias.
 
 ## Validado
 
@@ -33,7 +33,7 @@ O projeto está no estágio V8B2 consolidado. O pacote V8B2 validou a inferênci
 | Validação em campo | Não há piloto operacional real documentado após V8B2 |
 | Produção | Faltam bancada real, campo, longa duração, repetibilidade de hardware e critérios de escala |
 | Sensor físico real | V8B2 usou replay; V8C deve usar aquisição real ou semi-real |
-| Degradação de bateria/SOH | Não é modelada no V8B2 |
+| SOH operacional | SOH não integra o pacote SOC V8B2 e não possui validação operacional de degradação em campo |
 | Robustez 24/7 | Não foi validada como operação contínua longa |
 
 ## Limites de Claim
@@ -47,8 +47,15 @@ Claims que não devem ser usados:
 - validado em campo;
 - pronto para produção;
 - modelo definitivo;
-- validação com sensor físico real;
-- operação contínua de longa duração validada.
+- validação com sensor físico real no V8B2;
+- operação contínua de longa duração validada;
+- manutenção preditiva operacional;
+- diagnóstico real de degradação;
+- predição de vida útil.
+
+## Trilha SOH
+
+SOH permanece uma trilha separada de preparação metodológica. Ela pode orientar futuros experimentos, mas não altera o claim SOC V8B2 e não deve ser usada para afirmar degradação real, vida útil, campo ou produção.
 
 ## Próximo Experimento
 

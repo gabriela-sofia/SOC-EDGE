@@ -1,16 +1,23 @@
-# SOH — validação embarcada ESP32
+# SOH V2 Embarcado
 
-O SOH usa 16 features agregadas por ciclo.
+SOH V2 é tratado como trilha separada do SOC Method B.
 
-Random Forest foi usado como benchmark tabular forte: R² ≈ 0.987.
+## Estado Público
 
-A MLP foi escolhida como candidata embarcada: R² ≈ 0.91.
+No estado público atual, SOH não integra o pacote SOC V8B2. Qualquer claim de replay ou paridade embarcada de SOH deve permanecer restrito aos artefatos versionados que sustentem esse claim.
 
-## Validação ESP32
+## Limites
 
-- 120/120 amostras válidas
-- sample_id_match_all = True
-- MAE Python vs ESP32 ≈ 1e-6
-- RMSE Python vs ESP32 ≈ 1e-6
-- inferência média ≈ 0.255 ms
-- heap mínimo ≈ 277204 bytes
+SOH V2 não deve ser descrito como:
+
+- SOH operacional;
+- diagnóstico real de degradação;
+- predição de vida útil;
+- manutenção preditiva operacional;
+- validação em campo;
+- validação industrial;
+- prontidão para produção.
+
+## Relação com SOC
+
+SOC Method B permanece o pipeline principal. SOH readiness pode orientar experimentos futuros, mas não reescreve o Method B nem altera o escopo do V8B2.

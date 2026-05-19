@@ -1,8 +1,8 @@
-# SOC Method B
+# SOC-EDGE
 
-Este repositório organiza a versão pública e versionável do projeto SOC Method B, voltado à estimativa leve de State of Charge (SOC) de baterias para execução embarcada em ESP32.
+Este repositório organiza a versão pública do SOC Method B, voltado à estimativa leve de State of Charge (SOC) para inferência embarcada em ESP32.
 
-O objetivo científico é construir e validar um modelo edge-oriented, com treino offline em Python, exportação rastreável de scaler e pesos, verificação de paridade e inferência embarcada. A ESP32 executa apenas inferência; treino, seleção de modelo e validação estatística permanecem fora do firmware.
+O objetivo científico é manter um pipeline edge-oriented, auditável e conservador: treino offline em Python, exportação rastreável de scaler e pesos, verificação de paridade e inferência embarcada. A ESP32 executa apenas inferência; treino, seleção de modelo e validação estatística permanecem fora do firmware.
 
 ## Method B
 
@@ -28,9 +28,9 @@ Regras de implementação:
 - Features escaladas não devem ser clipadas.
 - Apenas o SOC final deve ser clipado para `[0, 1]`.
 
-## Estado Atual
+## Estado Atual do SOC
 
-O estágio consolidado é o V8B2. A validação embarcada por replay na ESP32 foi concluída com:
+O SOC Method B é o pipeline principal do repositório. O estágio público consolidado é o V8B2. O modelo canônico V7C foi executado dentro do pacote V8B2, e o pacote V8B2 foi validado por replay embarcado na ESP32 com:
 
 - `GOLDEN`: PASS.
 - `EXTENDED`: PASS.
@@ -40,9 +40,13 @@ O estágio consolidado é o V8B2. A validação embarcada por replay na ESP32 fo
 - heap e serial estáveis durante os replays registrados.
 - nenhum crash ou reset inesperado reportado nos testes consolidados.
 
-Claim permitido: o replay embarcado foi validado na ESP32 para o pacote V8B2.
+Claim permitido: o pacote V8B2 foi validado por replay embarcado na ESP32.
 
-Claims não permitidos: validação em campo, prontidão para produção, validação com sensores reais em bancada, ou modelo definitivo.
+Claims não permitidos: validação em campo, prontidão para produção, validação com sensores reais em bancada, operação 24/7 validada, validação industrial ou modelo definitivo.
+
+## Trilha SOH
+
+SOH é uma trilha separada de preparação metodológica. Ela não integra o pacote SOC V8B2 e não deve ser descrita como SOH operacional, diagnóstico real de degradação, predição de vida útil, manutenção preditiva, validação em campo ou produção.
 
 ## Estrutura
 
@@ -70,6 +74,7 @@ O handoff público curado está em `embedded/handoff_v8b2/` e a documentação c
 Instale as dependências Python usadas pelo projeto e rode:
 
 ```powershell
+python -m pip install -r requirements.txt
 python -m pytest
 ```
 
@@ -79,6 +84,12 @@ Para validar logs retornados da ESP32 no formato V8B2, use:
 python embedded/handoff_v8b2/validation/validate_esp32_v8b2.py --help
 ```
 
+Para verificar a estrutura pública do handoff V8B2:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/verify_handoff_v8b2.ps1
+```
+
 ## Próximo Estágio
 
-O próximo estágio metodologicamente correto é o V8C: validação de bancada com aquisição real ou semi-real, sensor físico, descarga controlada e relatório completo de latência, RAM, flash, estabilidade e paridade.
+O próximo estágio metodologicamente correto é o V8C: validação de bancada com aquisição real ou semi-real, sensor físico, descarga controlada e relatório completo de latência, RAM, flash, estabilidade e paridade. V8C ainda não é campo nem produção.

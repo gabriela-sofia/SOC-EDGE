@@ -4,18 +4,18 @@ Este documento prepara a evolução futura do SOC-EDGE para considerar degradaç
 
 ## Escopo Atual
 
-O foco atual permanece SOC Method B com inferência embarcada e validação progressiva. SOH é tratado apenas como preparação conceitual e requisito futuro de dados.
+O foco atual permanece SOC Method B com inferência embarcada e validação progressiva. SOH é tratado como trilha separada de preparação conceitual e requisito futuro de dados. SOH não integra o pacote SOC V8B2 e não possui validação operacional de degradação em campo.
 
 ## Variáveis Potenciais
 
 | Indicador | Papel possível | Status atual |
 |---|---|---|
 | Throughput acumulado | Proxy de uso energético total | Requer aquisição longitudinal |
-| Número de ciclos | Indicador de envelhecimento | Não consolidado no pipeline atual |
+| Número de ciclos | Indicador de envelhecimento | Não consolidado no pacote SOC V8B2 |
 | Drift de tensão | Possível sinal de degradação | Requer controle de carga e temperatura |
 | Drift de corrente | Pode indicar mudança operacional ou sensor | Precisa separar sensor de bateria |
 | Temperatura acumulada | Estresse térmico ao longo do tempo | Requer logs longos confiáveis |
-| Resistência interna estimada | Indicador físico de degradação | Não implementado |
+| Resistência interna estimada | Indicador físico de degradação | Não operacional no pacote SOC V8B2 |
 
 ## Dependências Futuras
 
@@ -32,7 +32,7 @@ O projeto atual não afirma:
 
 - SOH operacional;
 - predição de vida útil;
-- diagnóstico de degradação;
+- diagnóstico real de degradação;
 - validação em bateria envelhecida;
 - compensação automática por envelhecimento.
 

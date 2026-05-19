@@ -150,7 +150,7 @@ def scan_references(project_root: Path, original_root: Path) -> list[ReferenceHi
     patterns = {
         "absolute_original_path": re.escape(str(original_root)),
         "windows_original_folder_name": rf"(?i)(^|[^A-Za-z0-9_]){re.escape(original_name)}([^A-Za-z0-9_]|$)",
-        "legacy_soc_token": r"(?i)\bSOC\b",
+        "legacy_soc_pattern": r"(?i)\bSOC\b",
         "handoff_reference": r"(?i)\bhandoff\b",
         "method_b_reference": r"(?i)\bmethod[\s_-]*b\b",
         "esp32_reference": r"(?i)\bESP32\b|\btflite\b|\btensorflow\s*lite\b",

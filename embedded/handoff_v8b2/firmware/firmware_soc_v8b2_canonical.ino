@@ -16,10 +16,10 @@
  * IMPORTANT:
  *   - Current must be in mA (not A). Scaler bounds assume mA.
  *   - SOC output is clipped to [0.0, 1.0] before reporting.
- *   - V7C has NOT yet been validated on this hardware. This run is the validation.
+ *   - V7C canonical model is executed inside the V8B2 replay package.
  *   - Do not modify scaler bounds. They must match canonical exactly.
  *
- * V8B2 Handoff Package -- PREPARED_PACKAGE_NOT_YET_EXECUTED_ON_ESP32
+ * V8B2 Handoff Package -- public replay validation package
  * Date: 2026-05-16
  */
 
@@ -248,7 +248,7 @@ void setup() {
   Serial.begin(115200);
   delay(2000);  // wait for serial to stabilize
 
-  Serial.println("// V8B2 Canonical SOC Firmware -- NOT YET VALIDATED ON ESP32");
+  Serial.println("// V8B2 Canonical SOC Firmware -- replay validation package");
   Serial.println("// Model: V7C | Target: soc_method_b | Current unit: mA");
   Serial.println("// Schema: sample_id,mode,soc_final,inference_time_ms,free_heap,min_free_heap,max_alloc_heap,anomaly_flag,anomaly_code,status");
 
