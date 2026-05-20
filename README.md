@@ -90,6 +90,19 @@ Para verificar a estrutura pública do handoff V8B2:
 powershell -ExecutionPolicy Bypass -File scripts/verify_handoff_v8b2.ps1
 ```
 
+## Features Matemáticas de Janela e Ciclo
+
+A Fase 4B implementa camada de engenharia de features que prepara pipeline offline para otimização:
+
+```powershell
+python scripts/offline_eval/generate_window_cycle_features.py `
+    --input <caminho/local.csv> `
+    --output local_runs/features/output.csv `
+    --window-size 5
+```
+
+Features geradas incluem deltas, slopes, carga/energia acumulada e rolling statistics. Documentação completa em `docs/otimizacao/features_janela_ciclo.md`.
+
 ## Auditoria do Pacote V8B2
 
 O pacote V8B2 possui um manifesto canônico e um auditor estrutural:
