@@ -109,3 +109,61 @@ Claims proibidos nesta fase:
   de forma comparável ao baseline `float32`.
 - Fase 3C: medir ESP32 `float32` vs quantizado com os mesmos vetores, critérios
   de paridade, latência, heap e estabilidade.
+
+## Fase 3B: comparação de inferência float vs pesos dequantizados
+
+Esta etapa reconstrói a MLP `float32` a partir do header V8B2 e compara sua
+saída com uma segunda MLP em Python usando pesos e biases quantizados e
+dequantizados por tensor. O scaler é aplicado como no firmware:
+
+```text
+x_scaled[i] = (x[i] - SCALER_MIN[i]) * SCALER_SCALE[i]
+```
+
+As features escaladas não são clipadas. O clip é aplicado apenas ao SOC final
+em `[0, 1]`.
+
+Comando:
+
+```powershell
+python scripts/compare_v8b2_float_vs_dequantized.py
+```
+
+O script usa automaticamente, quando presentes:
+
+- `embedded/handoff_v8b2/replay/canonical_golden_vectors_v8b2.csv`;
+- `embedded/handoff_v8b2/replay/canonical_extended_replay_v8b2.csv`.
+
+As saídas calculadas são locais e ficam em `local_runs/quantization_v8b2/`:
+
+- `v8b2_float_vs_dequantized_predictions.csv`;
+- `v8b2_float_vs_dequantized_summary.json`.
+
+Métricas calculadas sobre os replays versionados:
+
+| Métrica | Valor |
+| --- | ---: |
+| Amostras | 140 |
+| Diferença absoluta máxima | 0.0389042245 |
+| Diferença absoluta média | 0.0100143235 |
+| RMSE da diferença | 0.0133678754 |
+| p95 da diferença absoluta | 0.0276084677 |
+| Diferença assinada máxima | 0.0389042245 |
+| Diferença assinada média | 0.0090401339 |
+
+Como os CSVs usados contêm `soc_clipped_reference`, a comparação também registra
+erro contra a referência canônica. A interpretação primária desta fase, porém,
+é a diferença entre a MLP `float32` reconstruída e a MLP com pesos
+dequantizados.
+
+Limites:
+
+- não é firmware INT8 embarcado;
+- não mede latência;
+- não substitui replay ESP32;
+- não altera o baseline canônico V8B2 `float32`;
+- não autoriza claim de campo, produção, sensor físico real ou operação 24/7.
+
+Próximo passo: Fase 3C, com implementação de caminho quantizado/fixed-point ou
+preparação de export TFLite Micro INT8, seguida de comparação na ESP32 contra o
+baseline `float32`.
