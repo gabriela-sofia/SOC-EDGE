@@ -20,6 +20,7 @@ DEFAULT_OUTPUT_DIR = Path("reports/v8c_quant_benchmark")
 DEFAULT_TEMPLATE = Path("embedded/handoff_v8c_quant_benchmark/reports/template_esp32_quant_benchmark_return.csv")
 BASELINE_HEADER = "embedded/handoff_v8b2/include/canonical_model_weights_v8b2.h"
 CANDIDATE_HEADER = "embedded/handoff_v8c_quant_benchmark/include/candidate_quantized_model.h"
+OPTIMIZED_CANDIDATE_HEADER = "embedded/handoff_v8c_quant_benchmark/include/candidate_quantized_model_optimized.h"
 REPLAY_HEADER = "embedded/handoff_v8b2/include/replay_vectors_v8b2.h"
 REPLAY_FILES = [
     "embedded/handoff_v8b2/replay/canonical_golden_vectors_v8b2.csv",
@@ -47,10 +48,26 @@ def build_package_manifest() -> dict[str, object]:
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
         "baseline": "MLP V7C/V8B2 float",
         "candidate_role": "experimental quantized or compact candidate",
-        "candidate_current_offline_status": "implemented for benchmark; max_abs_diff exceeds the initial conservative limit",
+        "candidate_current_offline_status": (
+            "per-array INT8 candidate preserved for traceability; optimized candidate is experimental and "
+            "must still be executed on ESP32"
+        ),
         "conservative_max_abs_diff_limit": 0.01,
         "baseline_header": BASELINE_HEADER,
         "candidate_header": CANDIDATE_HEADER,
+        "optimized_candidate_header": OPTIMIZED_CANDIDATE_HEADER,
+        "candidate_variants": [
+            {
+                "model_variant": "v8c_int8_per_array_candidate",
+                "header": CANDIDATE_HEADER,
+                "role": "first experimental INT8 candidate, preserved for traceability",
+            },
+            {
+                "model_variant": "v8c_optimized_candidate",
+                "header": OPTIMIZED_CANDIDATE_HEADER,
+                "role": "optimized experimental candidate for benchmark, not a baseline replacement",
+            },
+        ],
         "replay_vectors_header": REPLAY_HEADER,
         "target": "Method B / soc_q_cycle",
         "feature_order": FEATURE_ORDER,
@@ -65,12 +82,15 @@ def build_package_manifest() -> dict[str, object]:
             "Record inference_time_ms for each sample.",
             "Record heap_free, heap_min_free, and max_alloc_heap when available.",
             "Record flash_bytes or binary size when available.",
-            "Return one log set for model_variant=baseline_float and one for model_variant=v8c_int8_candidate.",
+            "Return one log set for model_variant=baseline_float.",
+            "Return one log set for model_variant=v8c_int8_per_array_candidate when compiled.",
+            "Return one log set for model_variant=v8c_optimized_candidate when compiled.",
             "Do not report field, production, 24/7, physical sensor, or operational SOH claims.",
         ],
         "operator_instructions": [
             f"Compile the baseline firmware with {BASELINE_HEADER}.",
-            f"Compile an experimental candidate variant including {CANDIDATE_HEADER}.",
+            f"Compile the first experimental candidate variant including {CANDIDATE_HEADER}.",
+            f"Compile the optimized experimental candidate variant including {OPTIMIZED_CANDIDATE_HEADER}, if present.",
             f"Use replay vectors from {REPLAY_HEADER} and the CSV replay files listed here.",
             "Run GOLDEN, EXTENDED, and ANOMALY modes for each model variant.",
             "Return the completed CSV template and raw serial logs; no Python knowledge is required.",

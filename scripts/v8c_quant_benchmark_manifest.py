@@ -26,6 +26,7 @@ DEFAULT_RELEVANT_FILES = [
     Path("embedded/handoff_v8b2/replay/canonical_extended_replay_v8b2.csv"),
     Path("embedded/handoff_v8b2/anomaly/anomaly_replay_scenarios_v8b2.csv"),
     Path("embedded/handoff_v8c_quant_benchmark/include/candidate_quantized_model.h"),
+    Path("embedded/handoff_v8c_quant_benchmark/include/candidate_quantized_model_optimized.h"),
     Path("embedded/handoff_v8c_quant_benchmark/include/README_candidate_quantized.md"),
 ]
 
@@ -64,6 +65,19 @@ def build_manifest(relevant_files: list[Path] | None = None) -> dict[str, object
             "status": "EXPERIMENTAL_CANDIDATE_IF_HEADER_EXISTS",
             "expected_role": "per_array_symmetric_int8_candidate",
             "candidate_header": "embedded/handoff_v8c_quant_benchmark/include/candidate_quantized_model.h",
+            "optimized_candidate_header": "embedded/handoff_v8c_quant_benchmark/include/candidate_quantized_model_optimized.h",
+            "variants": [
+                {
+                    "model_variant": "v8c_int8_per_array_candidate",
+                    "strategy": "INT8 symmetric per-array weights and biases",
+                    "role": "first experimental candidate, preserved for traceability",
+                },
+                {
+                    "model_variant": "v8c_optimized_candidate",
+                    "strategy": "optimized deterministic fixed-point candidate when header exists",
+                    "role": "experimental optimized benchmark candidate, not a baseline replacement",
+                },
+            ],
             "acceptance_requires": "same replay vectors, same feature order, same scaler policy, same clipping policy",
         },
         "feature_order": FEATURE_ORDER,
