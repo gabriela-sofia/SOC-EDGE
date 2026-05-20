@@ -1,1 +1,1 @@
-sample_id,mode,model_variant,soc_final,inference_time_ms,free_heap,min_free_heap,flash_bytes,anomaly_flag,status
+sample_id,mode,model_variant,soc_final,inference_time_ms,heap_free,heap_min_free,flash_bytes,max_alloc_heap,anomaly_flag,status

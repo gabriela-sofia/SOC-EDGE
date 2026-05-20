@@ -5,6 +5,6 @@ replay_header,embedded/handoff_v8b2/include/replay_vectors_v8b2.h,yes,Vetores C 
 golden_replay,embedded/handoff_v8b2/replay/canonical_golden_vectors_v8b2.csv,yes,Replay GOLDEN
 extended_replay,embedded/handoff_v8b2/replay/canonical_extended_replay_v8b2.csv,yes,Replay EXTENDED
 anomaly_replay,embedded/handoff_v8b2/anomaly/anomaly_replay_scenarios_v8b2.csv,yes,Cenarios ANOMALY
-candidate_header,embedded/handoff_v8c_quant_benchmark/include/candidate_quantized_model.h,no,Candidato experimental quando existir
+candidate_header,embedded/handoff_v8c_quant_benchmark/include/candidate_quantized_model.h,yes,Candidato experimental INT8 V8C
+candidate_readme,embedded/handoff_v8c_quant_benchmark/include/README_candidate_quantized.md,yes,Documentacao da candidata experimental
 esp32_return_template,embedded/handoff_v8c_quant_benchmark/reports/template_esp32_quant_benchmark_return.csv,yes,Template de retorno dos logs
-

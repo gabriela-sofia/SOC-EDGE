@@ -25,8 +25,8 @@ DEFAULT_RELEVANT_FILES = [
     Path("embedded/handoff_v8b2/replay/canonical_golden_vectors_v8b2.csv"),
     Path("embedded/handoff_v8b2/replay/canonical_extended_replay_v8b2.csv"),
     Path("embedded/handoff_v8b2/anomaly/anomaly_replay_scenarios_v8b2.csv"),
-    Path("embedded/quantization/V8B2_INT8_CANDIDATE_MANIFEST.json"),
-    Path("embedded/quantization/canonical_model_weights_v8b2_int8_candidate.h"),
+    Path("embedded/handoff_v8c_quant_benchmark/include/candidate_quantized_model.h"),
+    Path("embedded/handoff_v8c_quant_benchmark/include/README_candidate_quantized.md"),
 ]
 
 
@@ -61,8 +61,9 @@ def build_manifest(relevant_files: list[Path] | None = None) -> dict[str, object
             "target": "Method B / soc_q_cycle",
         },
         "experimental_candidate": {
-            "status": "EXPERIMENTAL",
-            "expected_role": "quantized_or_compact_candidate",
+            "status": "EXPERIMENTAL_CANDIDATE_IF_HEADER_EXISTS",
+            "expected_role": "per_array_symmetric_int8_candidate",
+            "candidate_header": "embedded/handoff_v8c_quant_benchmark/include/candidate_quantized_model.h",
             "acceptance_requires": "same replay vectors, same feature order, same scaler policy, same clipping policy",
         },
         "feature_order": FEATURE_ORDER,
@@ -142,4 +143,3 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

@@ -19,6 +19,8 @@ A pessoa da ESP32 deve usar os mesmos vetores de replay e anomalia do V8B2 como 
 
 - Firmware baseline: `embedded/handoff_v8b2/firmware/firmware_soc_v8b2_canonical.ino`.
 - Pesos/scaler baseline: `embedded/handoff_v8b2/include/canonical_model_weights_v8b2.h`.
+- Header candidato experimental: `embedded/handoff_v8c_quant_benchmark/include/candidate_quantized_model.h`.
+- Documentacao da candidata: `embedded/handoff_v8c_quant_benchmark/include/README_candidate_quantized.md`.
 - Vetores C baseline: `embedded/handoff_v8b2/include/replay_vectors_v8b2.h`.
 - Replays: `embedded/handoff_v8b2/replay/`.
 - Anomalias: `embedded/handoff_v8b2/anomaly/`.
@@ -34,8 +36,9 @@ Para cada firmware testado, devolver logs GOLDEN, EXTENDED e ANOMALY com:
 - `model_variant`;
 - `soc_final`;
 - `inference_time_ms`;
-- `free_heap`;
-- `min_free_heap`, se disponivel;
+- `heap_free`;
+- `heap_min_free`, se disponivel;
+- `max_alloc_heap`, se disponivel;
 - `flash_bytes` ou tamanho aproximado do binario, se disponivel;
 - `anomaly_flag`;
 - `status`.

@@ -22,7 +22,9 @@ NEW_TEXT_FILES = [
     ROOT / "docs/validacao_embarcada/protocolo_quantizacao_benchmark_esp32.md",
     ROOT / "docs/validacao_embarcada/criterios_quantizacao_benchmark_esp32.md",
     ROOT / "embedded/handoff_v8c_quant_benchmark/README.md",
+    ROOT / "embedded/handoff_v8c_quant_benchmark/include/README_candidate_quantized.md",
 ]
+DEFAULT_CANDIDATE = ROOT / "embedded/handoff_v8c_quant_benchmark/include/candidate_quantized_model.h"
 
 
 def test_feature_order_exact():
@@ -67,6 +69,9 @@ def test_manifest_writers_generate_json_and_csv(tmp_path):
     assert csv_path.exists()
     data = json.loads(json_path.read_text(encoding="utf-8"))
     assert data["baseline_model"]["target"] == "Method B / soc_q_cycle"
+    assert data["experimental_candidate"]["candidate_header"] == (
+        "embedded/handoff_v8c_quant_benchmark/include/candidate_quantized_model.h"
+    )
     with csv_path.open(encoding="utf-8", newline="") as handle:
         rows = list(csv.DictReader(handle))
     assert rows
@@ -109,6 +114,36 @@ def test_compare_candidate_function_reports_baseline_only(tmp_path):
     assert summary["all_soc_in_unit_interval"] is True
 
 
+def test_candidate_header_exists_and_is_detected():
+    assert DEFAULT_CANDIDATE.exists()
+    records, summary = compare_candidate(
+        ROOT / "embedded/handoff_v8b2/include/canonical_model_weights_v8b2.h",
+        DEFAULT_CANDIDATE,
+        [ROOT / "embedded/handoff_v8b2/replay/canonical_golden_vectors_v8b2.csv"],
+    )
+    assert records
+    assert summary["candidate_status"] == "CANDIDATE_AVAILABLE"
+    assert summary["candidate_scheme"] == "per_array_symmetric_int8_dequantized_forward"
+    assert summary["candidate_diff_vs_float"]["n"] == 20
+    assert summary["candidate_nan_inf_count"] == 0
+    assert summary["candidate_soc_summary"]["min"] >= 0.0
+    assert summary["candidate_soc_summary"]["max"] <= 1.0
+    assert summary["conservative_max_abs_diff_limit"] == 0.01
+    assert summary["candidate_within_conservative_limit"] is False
+    assert summary["all_outputs_finite"] is True
+    assert summary["all_soc_in_unit_interval"] is True
+
+
+def test_candidate_header_preserves_contract_text():
+    text = DEFAULT_CANDIDATE.read_text(encoding="utf-8")
+    assert "voltage_v, temperature_c, current_ma, delta_voltage, delta_temperature, delta_current" in text
+    assert "current_ma mA" in text
+    assert "do not clip scaled features" in text
+    assert "clip only final SOC" in text
+    assert "candidate_mlp_predict" in text
+    assert "int8_t W0_Q" in text
+
+
 def test_esp32_package_manifest_and_template(tmp_path):
     manifest_path = tmp_path / "package_manifest.json"
     template_path = tmp_path / "return_template.csv"
@@ -128,6 +163,8 @@ def test_esp32_package_manifest_and_template(tmp_path):
     assert result.returncode == 0, result.stderr
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     assert manifest["feature_order"] == FEATURE_ORDER
+    assert manifest["candidate_header"] == "embedded/handoff_v8c_quant_benchmark/include/candidate_quantized_model.h"
+    assert manifest["baseline_header"] == "embedded/handoff_v8b2/include/canonical_model_weights_v8b2.h"
     assert "embedded/handoff_v8b2/replay/canonical_golden_vectors_v8b2.csv" in manifest["replay_files"]
     with template_path.open(encoding="utf-8", newline="") as handle:
         header = next(csv.reader(handle))
@@ -172,9 +209,32 @@ def test_new_docs_are_portuguese_technical_text():
 
 
 def test_no_heavy_versionable_artifacts_in_v8c_layer():
-    allowed_suffixes = {".md", ".csv", ".json"}
+    allowed_suffixes = {".md", ".csv", ".json", ".h"}
     for path in (ROOT / "embedded/handoff_v8c_quant_benchmark").rglob("*"):
         if path.is_file():
             assert path.suffix in allowed_suffixes
             assert path.stat().st_size < 200_000
 
+
+def test_default_candidate_script_reports_available(tmp_path):
+    summary_path = tmp_path / "summary.json"
+    csv_path = tmp_path / "predictions.csv"
+    result = subprocess.run(
+        [
+            sys.executable,
+            "scripts/v8c_python_float_vs_candidate_benchmark.py",
+            "--json",
+            str(summary_path),
+            "--csv",
+            str(csv_path),
+        ],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+    )
+    assert result.returncode == 0, result.stderr
+    summary = json.loads(summary_path.read_text(encoding="utf-8"))
+    assert summary["candidate_status"] == "CANDIDATE_AVAILABLE"
+    assert summary["candidate_nan_inf_count"] == 0
+    assert summary["candidate_soc_summary"]["min"] >= 0.0
+    assert summary["candidate_soc_summary"]["max"] <= 1.0
