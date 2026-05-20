@@ -1,0 +1,26 @@
+{
+  "candidate_name": "SOC-EDGE V8B2 INT8 candidate header",
+  "source_float_header": "embedded/handoff_v8b2/include/canonical_model_weights_v8b2.h",
+  "source_package_stage": "V8B2",
+  "scheme": "per_array_symmetric_int8",
+  "status": "offline quantization candidate",
+  "validation_scope": "offline weight quantization and dequantized inference comparison",
+  "claim_limits": [
+    "no embedded INT8 validation",
+    "no latency claim",
+    "no production claim",
+    "no field validation",
+    "no physical sensor validation"
+  ],
+  "generated_header": "embedded/quantization/canonical_model_weights_v8b2_int8_candidate.h",
+  "feature_order": [
+    "voltage_v",
+    "temperature_c",
+    "current_ma",
+    "delta_voltage",
+    "delta_temperature",
+    "delta_current"
+  ],
+  "output_rule": "Clip only final SOC output to [0, 1].",
+  "notes": "Candidate text header for future firmware experiments; float32 V8B2 remains canonical baseline."
+}

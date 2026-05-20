@@ -167,3 +167,72 @@ Limites:
 Próximo passo: Fase 3C, com implementação de caminho quantizado/fixed-point ou
 preparação de export TFLite Micro INT8, seguida de comparação na ESP32 contra o
 baseline `float32`.
+
+## Fase 3C: comparação de esquemas e header quantizado candidato
+
+Esta fase compara estratégias offline de quantização de pesos e exporta um
+header C candidato para experimentos futuros. O objetivo é escolher um ponto de
+partida auditável para firmware quantizado, sem afirmar que o caminho INT8 já
+foi validado na ESP32.
+
+Comandos:
+
+```powershell
+python scripts/compare_v8b2_quantization_schemes.py
+python scripts/export_v8b2_quantized_header.py
+```
+
+Esquemas comparados:
+
+- `global_symmetric_int8`: uma escala única para todos os pesos e biases;
+- `per_array_symmetric_int8`: uma escala por array (`W0`, `B0`, `W1`, `B1`,
+  `W2`, `B2`);
+- `per_layer_group_symmetric_int8`: uma escala por grupo de camada
+  (`W0+B0`, `W1+B1`, `W2+B2`).
+
+Ranking observado por RMSE entre MLP `float32` e pesos dequantizados:
+
+| Posição | Esquema |
+| ---: | --- |
+| 1 | `per_array_symmetric_int8` |
+| 2 | `per_layer_group_symmetric_int8` |
+| 3 | `global_symmetric_int8` |
+
+Métricas do melhor esquema:
+
+| Métrica | Valor |
+| --- | ---: |
+| Amostras | 140 |
+| Diferença absoluta média | 0.0100143235 |
+| RMSE da diferença | 0.0133678754 |
+| p95 da diferença absoluta | 0.0276084677 |
+| Diferença absoluta máxima | 0.0389042245 |
+| Compressão teórica | 4.0x |
+| Número de escalas | 6 |
+
+Arquivos candidatos versionados:
+
+- `embedded/quantization/canonical_model_weights_v8b2_int8_candidate.h`;
+- `embedded/quantization/V8B2_INT8_CANDIDATE_MANIFEST.json`.
+
+Diferenças de escopo:
+
+- `float32` canônico: referência pública validada por replay embarcado V8B2;
+- pesos dequantizados offline: simulação Python para estimar impacto numérico;
+- header INT8 candidato: artefato textual para experimentos futuros;
+- firmware INT8 validado: ainda não existe neste estágio.
+
+Limites:
+
+- não há claim de firmware INT8 embarcado;
+- não há claim de melhoria de latência;
+- não substitui replay ESP32;
+- não altera o baseline `float32`;
+- não autoriza campo, produção, sensor físico real ou operação 24/7.
+
+Próximos passos:
+
+- Fase 3D: implementar caminho experimental no firmware ou uma referência
+  fixed-point auditável;
+- Fase 3E: comparar ESP32 `float32` vs candidato quantizado com os mesmos
+  critérios de paridade, latência, heap e estabilidade.

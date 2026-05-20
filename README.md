@@ -121,6 +121,8 @@ afirmar firmware INT8 validado:
 python scripts/analyze_v8b2_model_footprint.py
 python scripts/simulate_v8b2_weight_quantization.py
 python scripts/compare_v8b2_float_vs_dequantized.py
+python scripts/compare_v8b2_quantization_schemes.py
+python scripts/export_v8b2_quantized_header.py
 ```
 
 Os relatórios calculados localmente devem ficar em `local_runs/`. A MLP
