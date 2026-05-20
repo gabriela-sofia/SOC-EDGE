@@ -1,0 +1,11 @@
+field,required,description,unit,notes
+sample_id,FALSE,"Identificador único de amostra","adimensional","Preservado do CSV de entrada se presente; caso contrário, podem ser gerados índices"
+cell_id,FALSE,"Identificador de célula/bateria","adimensional","Usado para agrupar amostras; redefine acumuladores ao mudar"
+cycle_id,FALSE,"Identificador de ciclo (carga/descarga)","adimensional","Usado para agrupar amostras; redefine acumuladores ao mudar"
+timestamp_s,CONDITIONAL,"Tempo absoluto desde época (unix)","segundos","Necessária uma coluna de tempo: timestamp_s OU elapsed_time_s"
+elapsed_time_s,CONDITIONAL,"Tempo relativo desde início","segundos","Necessária uma coluna de tempo: timestamp_s OU elapsed_time_s"
+voltage_v,TRUE,"Tensão da célula","Volts","Obrigatório; usado para deltas, slopes, rolling stats, energia"
+current_ma,TRUE,"Corrente da célula","miliAmperes","Obrigatório; unidade fixa em mA; usado para deltas, slopes, rolling stats, carga, energia"
+temperature_c,TRUE,"Temperatura da célula","Celsius","Obrigatório; usado para deltas, slopes, rolling stats"
+soc_method_b,FALSE,"State of Charge pelo Method B","adimensional [0,1]","Opcional; preservado no output mas NÃO usado como feature"
+soc_q_cycle,FALSE,"SOC por normalização de ciclo","adimensional [0,1]","Opcional; preservado no output mas NÃO usado como feature"
