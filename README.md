@@ -112,6 +112,20 @@ python scripts/parse_v8b2_benchmark.py embedded/handoff_v8b2/v8b2_esp32_golden_l
 
 Como `local_runs/` é ignorado, relatórios gerados localmente não entram no Git. O benchmark mede runtime, latência, heap e parsing do replay embarcado; ele não representa validação em campo, produção ou sensor físico real no V8B2.
 
+## Otimização e quantização V8B2
+
+A camada de quantização mede footprint e erro de dequantização de pesos, sem
+afirmar firmware INT8 validado:
+
+```powershell
+python scripts/analyze_v8b2_model_footprint.py
+python scripts/simulate_v8b2_weight_quantization.py
+```
+
+Os relatórios calculados localmente devem ficar em `local_runs/`. A MLP
+`float32` do V8B2 continua sendo o baseline canônico até comparação embarcada
+justa.
+
 ## Próximo Estágio
 
 O próximo estágio metodologicamente correto é o V8C: validação de bancada com aquisição real ou semi-real, sensor físico, descarga controlada e relatório completo de latência, RAM, flash, estabilidade e paridade. V8C ainda não é campo nem produção.
