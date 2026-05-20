@@ -1,0 +1,15 @@
+field,required,description,allowed_values
+optimization_id,true,Identificador único da otimização,
+frente,true,Frente científica ou operacional,target físico|features|splits|modelos|híbridos|quantização|anomalias|drift|SOH|embarcado
+nome,true,Nome curto da otimização,
+objetivo,true,Objetivo científico ou técnico,
+tipo,true,Tipo do item,target|feature|split|modelo|híbrido|calibração|quantização|anomalia|drift|SOH|embarcado
+status,true,Estado atual do item,consolidado|parcial|planejado|candidato
+entrada_esperada,true,Entrada esperada para avaliar o item,
+saida_esperada,true,Saída esperada ou artefato produzido,
+compativel_esp32,true,Compatibilidade esperada com ESP32,sim|não|parcial|indireto/offline|planejado
+custo_embarcado_estimado,true,Estimativa qualitativa de custo embarcado,nenhum|baixo|médio|alto
+depende_de_dados_locais,true,Indica se depende de dados locais não versionados,sim|não
+claim_permitido,true,Claim conservador permitido,
+claim_proibido,true,Claim explicitamente proibido,
+proxima_fase,true,Fase planejada para evolução,

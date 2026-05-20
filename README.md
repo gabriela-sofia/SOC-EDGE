@@ -129,6 +129,19 @@ Os relatórios calculados localmente devem ficar em `local_runs/`. A MLP
 `float32` do V8B2 continua sendo o baseline canônico até comparação embarcada
 justa.
 
+## Matriz de otimização científica offline
+
+A matriz de otimização organiza frentes, métricas, splits e claims permitidos
+para evoluções offline do SOC-EDGE:
+
+```powershell
+python scripts/offline_eval/check_optimization_registry.py
+python scripts/offline_eval/check_evaluation_matrix.py
+```
+
+Essa camada não treina modelos novos nem altera o baseline V8B2; ela define
+contratos de avaliação para as próximas fases.
+
 ## Próximo Estágio
 
 O próximo estágio metodologicamente correto é o V8C: validação de bancada com aquisição real ou semi-real, sensor físico, descarga controlada e relatório completo de latência, RAM, flash, estabilidade e paridade. V8C ainda não é campo nem produção.

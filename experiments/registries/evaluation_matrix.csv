@@ -1,0 +1,21 @@
+evaluation_id,objeto_avaliado,split,metrica,objetivo,threshold_inicial,obrigatoria_para_claim,observacoes
+EVAL_001,SOC baseline,random_holdout,MAE,baseline fraco de erro médio,a definir,não,usar apenas como referência inicial
+EVAL_002,SOC baseline,split temporal,RMSE,medir erro médio quadrático temporal,a definir,sim,evita vazamento futuro-passado
+EVAL_003,SOC baseline,split por ciclo,R2,avaliar ajuste global por ciclo,a definir,não,não basta para claim embarcado
+EVAL_004,SOC baseline,split por célula,max_abs_error,controlar pior caso por célula,a definir,sim,necessário para robustez cross-cell
+EVAL_005,SOC baseline,leave-one-cell-out,p95_abs_error,avaliar cauda de erro,a definir,sim,stress test de generalização
+EVAL_006,SOC baseline,split temporal,temporal_stability,medir oscilação temporal,a definir,sim,necessário para uso em stream futuro
+EVAL_007,SOC baseline,split por ciclo,drift_by_cycle,medir tendência de erro por ciclo,a definir,sim,ponte para SOH readiness
+EVAL_008,ESP32 replay,replay embarcado,latency_mean_ms,medir latência média,a definir,sim,claim limitado a replay embarcado
+EVAL_009,ESP32 replay,replay embarcado,latency_p95_ms,medir latência p95,a definir,sim,mais robusto que média isolada
+EVAL_010,ESP32 replay,replay embarcado,heap_min_bytes,medir heap mínimo,a definir,sim,indicador de estabilidade de memória
+EVAL_011,ESP32 firmware,replay embarcado,flash_bytes,registrar footprint de flash,a definir,sim,necessário para comparação embarcada
+EVAL_012,anomalias,replay embarcado,anomaly_recall,medir detecção de cenários anômalos,a definir,sim,claim restrito aos cenários versionados
+EVAL_013,anomalias,stream digital V8C,anomaly_false_positive_rate,medir falso positivo em stream,a definir,sim,planejado para bancada
+EVAL_014,ESP32 replay,replay embarcado,sample_id_match_rate,verificar alinhamento amostra a amostra,1.0,sim,necessário para paridade
+EVAL_015,logs seriais,replay embarcado,parse_error_rate,medir integridade de parsing,0.0,sim,não mede campo
+EVAL_016,SOC candidato,split por célula,MAE,comparar candidato contra baseline,a definir,sim,cross-cell obrigatório
+EVAL_017,SOC candidato,split por ciclo,RMSE,comparar estabilidade por ciclo,a definir,sim,cross-cycle obrigatório
+EVAL_018,SOC candidato,leave-one-cell-out,max_abs_error,avaliar pior caso leave-one-cell-out,a definir,sim,não autoriza produção
+EVAL_019,SOC candidato,stream digital V8C,latency_mean_ms,preparar avaliação em stream,a definir,sim,V8C ainda é bancada
+EVAL_020,quantização,replay embarcado,latency_p95_ms,comparar candidato quantizado no futuro,a definir,sim,não existe claim INT8 atual
